@@ -3,7 +3,7 @@
  * 
  * Author: Pixel Industry
  * Website: http://pixel-industry.com
- * Version: 1.1
+ * Version: 1.2
  *
  */
 
@@ -32,7 +32,7 @@
                                 var photo_title = photo.title;
                                 var photo_src = photo.url_sq;
                                 var photo_id = photo.id;
-                                var photo_url = "http://www.flickr.com/photos/" + photo_author + "/" + photo_id;
+                                var photo_url = "https://www.flickr.com/photos/" + photo_author + "/" + photo_id;
                                 var photo_container = $('<img/>').attr({
                                     src: photo_src, 
                                     alt: photo_title
