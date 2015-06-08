@@ -2,66 +2,66 @@
     <head>
         <meta charset="UTF-8">
         <meta name="author" content="pixel-industry">
-		
-		<link rel="stylesheet" href="style.css" /> 
-		
-			
-		</head>
-		
-		<body>
-					<article class="grid_3 social-feed deviant-feed">
-                        <section class="section-title">
-                            <h4>deviant art</h4>
-                        </section>
-                    </article>
 
-                    <article class="grid_3 social-feed instagram-feed">
-                        <section class="section-title">
-                            <h4>Instagram</h4>
-                        </section>
-                    </article>
+        <link rel="stylesheet" href="style.css" /> 
 
-                    <article class="grid_3 social-feed picasa-feed">
-                        <section class="section-title">
-                            <h4>Picasa</h4>
-                        </section>
-                    </article>
 
-                    <article class="grid_3 social-feed pinterest-feed">
-                        <section class="section-title">
-                            <h4>pinterest</h4>
-                        </section>
-                    </article>
+    </head>
 
-                    <article class="grid_3 social-feed flickr-feed">
-                        <section class="section-title">
-                            <h4>flickr</h4>
-                        </section>
-                    </article>
+    <body>
+        <article class="grid_3 social-feed deviant-feed">
+            <section class="section-title">
+                <h4>deviant art</h4>
+            </section>
+        </article>
 
-                    <article class="grid_3 social-feed dribbble-feed">
-                        <section class="section-title">
-                            <h4>dribbble</h4>
-                        </section>
-                    </article>
+        <article class="grid_3 social-feed instagram-feed">
+            <section class="section-title">
+                <h4>Instagram</h4>
+            </section>
+        </article>
 
-                    <article class="grid_3 social-feed youtube-feed">
-                        <section class="section-title">
-                            <h4>youtube</h4>
-                        </section>
-                    </article>
+        <article class="grid_3 social-feed picasa-feed">
+            <section class="section-title">
+                <h4>Picasa</h4>
+            </section>
+        </article>
 
-                    <article class="grid_3 social-feed newsfeed">
-                        <section class="section-title">
-                            <h4>newsfeed</h4>
-                        </section>
-                    </article>
-					
-					<script  src="jquery-1.8.3.js"></script> <!-- jQuery library -->
-					<script src="socialstream.jquery.js"></script>
-				
-					
-					<script> 
+        <article class="grid_3 social-feed pinterest-feed">
+            <section class="section-title">
+                <h4>pinterest</h4>
+            </section>
+        </article>
+
+        <article class="grid_3 social-feed flickr-feed">
+            <section class="section-title">
+                <h4>flickr</h4>
+            </section>
+        </article>
+
+        <article class="grid_3 social-feed dribbble-feed">
+            <section class="section-title">
+                <h4>dribbble</h4>
+            </section>
+        </article>
+
+        <article class="grid_3 social-feed youtube-feed">
+            <section class="section-title">
+                <h4>youtube</h4>
+            </section>
+        </article>
+
+        <article class="grid_3 social-feed newsfeed">
+            <section class="section-title">
+                <h4>newsfeed</h4>
+            </section>
+        </article>
+
+        <script  src="jquery-1.8.3.js"></script> <!-- jQuery library -->
+        <script src="../socialstream.jquery.js"></script>
+
+
+        <script>
             /* <![CDATA[ */
             /* ================ PINTEREST FEED ================ */
             $('.pinterest-feed').socialstream({
@@ -69,42 +69,43 @@
                 limit: 15,
                 username: 'vmrkela'
             })
-        
+
             /* ================ DEVIANT ART FEED ================ */
             $('.deviant-feed').socialstream({
                 socialnetwork: 'deviantart',
                 limit: 15,
                 username: 'pixel-industry'
             })
-             
+
             /* ================ FLICKR FEED ================ */
             $('.flickr-feed').socialstream({
                 socialnetwork: 'flickr',
                 limit: 15,
                 username: 'Mrky1'
             })
-        
+
             /* ================ DRIBBBLE FEED ================ */
             $('.dribbble-feed').socialstream({
                 socialnetwork: 'dribbble',
                 limit: 15,
                 username: 'envato'
             })
-        
+
             /* ================ YOUTUBE FEED ================ */
             $('.youtube-feed').socialstream({
                 socialnetwork: 'youtube',
                 limit: 15,
-                username: 'Envato'
+                username: 'Envato',
+                apikey: '' // REQUIRED - enter your Youtube v3 API key
             })
-        
+
             /* ================ NEWSFEED ================ */
             $('.newsfeed').socialstream({
                 socialnetwork: 'newsfeed',
                 limit: 15,
                 username: ' http://feeds.feedburner.com/webdesignerdepot?format=xml'
             })
-            
+
             /* ================ INSTAGRAM FEED ================ */
             $('.instagram-feed').socialstream({
                 socialnetwork: 'flickr',
@@ -112,14 +113,14 @@
                 username: 'Mrky1',
                 overlay: true
             })
-			
-			 /* ================ PICASA FEED ================ */
-			$('.picasa-feed').socialstream({
-				socialnetwork: 'picasa',
-				limit: 15,
-				username: 'vmrkela1@gmail.com'
-			});
+
+            /* ================ PICASA FEED ================ */
+            $('.picasa-feed').socialstream({
+                socialnetwork: 'picasa',
+                limit: 15,
+                username: 'vmrkela1@gmail.com'
+            });
             /* ]]> */
         </script>
-		</body>
-		</html>
+    </body>
+</html>

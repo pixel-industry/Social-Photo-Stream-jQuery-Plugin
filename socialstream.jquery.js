@@ -3,48 +3,49 @@
  * 
  * Author: Pixel Industry
  * Website: http://pixel-industry.com
- * Version: 1.2
+ * Version: 1.3
  *
  */
 
 
-(function($){  
-    $.fn.socialstream = function(options) {  
-        var defaults = {  
+(function ($) {
+    $.fn.socialstream = function (options) {
+        var defaults = {
             socialnetwork: 'flickr',
             username: 'pixel-industry',
             limit: 6,
-            overlay: true
-        };  
-        var options = $.extend(defaults, options);  
-      
-        return this.each(function() {  
-            var object = $(this); 
-            switch(options.socialnetwork){
-                
+            overlay: true,
+            apikey: false
+        };
+        var options = $.extend(defaults, options);
+
+        return this.each(function () {
+            var object = $(this);
+            switch (options.socialnetwork) {
+
                 case 'flickr':
                     object.append("<ul class=\"flickr-list\"></ul>")
-                    $.getJSON("https://api.flickr.com/services/rest/?method=flickr.people.findByUsername&username=" + options.username + "&format=json&api_key=32ff8e5ef78ef2f44e6a1be3dbcf0617&jsoncallback=?", function(data){
+                    $.getJSON("https://api.flickr.com/services/rest/?method=flickr.people.findByUsername&username=" + options.username + "&format=json&api_key=32ff8e5ef78ef2f44e6a1be3dbcf0617&jsoncallback=?", function (data) {
                         var user_id = data.user.nsid;
-                        $.getJSON("https://api.flickr.com/services/rest/?method=flickr.photos.search&user_id=" + user_id + "&format=json&api_key=85145f20ba1864d8ff559a3971a0a033&per_page=" + options.limit + "&page=1&extras=url_sq&jsoncallback=?", function(data){
-                            $.each(data.photos.photo, function(num, photo){
+                        $.getJSON("https://api.flickr.com/services/rest/?method=flickr.photos.search&user_id=" + user_id + "&format=json&api_key=85145f20ba1864d8ff559a3971a0a033&per_page=" + options.limit + "&page=1&extras=url_sq&jsoncallback=?", function (data) {
+                            $.each(data.photos.photo, function (num, photo) {
                                 var photo_author = photo.owner;
                                 var photo_title = photo.title;
                                 var photo_src = photo.url_sq;
                                 var photo_id = photo.id;
                                 var photo_url = "https://www.flickr.com/photos/" + photo_author + "/" + photo_id;
                                 var photo_container = $('<img/>').attr({
-                                    src: photo_src, 
+                                    src: photo_src,
                                     alt: photo_title
                                 });
                                 var url_container = $('<a/>').attr({
-                                    href: photo_url, 
-                                    target: '_blank', 
+                                    href: photo_url,
+                                    target: '_blank',
                                     title: photo_title
                                 });
-                                
+
                                 var tmp = $(url_container).append(photo_container);
-                                if(options.overlay){
+                                if (options.overlay) {
                                     var overlay_div = $('<div/>').addClass('img-overlay');
                                     $(url_container).append(overlay_div);
                                 }
@@ -52,106 +53,106 @@
                                 $("ul", object).append(li);
                             })
                         });
-                    });	
+                    });
                     break;
                 case 'pinterest':
                     var url = 'http://pinterest.com/' + options.username + '/feed.rss'
                     var api = "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=" + encodeURIComponent(url) + "&num=" + options.limit + "&output=json_xml";
-				
+
                     // Send request
-                    $.getJSON(api, function(data){	
-                        if (data.responseStatus == 200) {			
+                    $.getJSON(api, function (data) {
+                        if (data.responseStatus == 200) {
                             var photofeed = data.responseData.feed;
                             var overlay_div = "";
                             if (!photofeed) {
-                                return false;                                
+                                return false;
                             }
                             var html_code = '<ul class=\"pinterest-list\">';
-					
+
                             for (var i = 0; i < photofeed.entries.length; i++) {
                                 var entry = photofeed.entries[i];
                                 var $container = $("<div></div>");
                                 $container.append(entry.content);
-                                var url = "http://www.pinterest.com" + $container.find('a').attr('href');                           
+                                var url = "http://www.pinterest.com" + $container.find('a').attr('href');
                                 var photo_url = $container.find('img').attr('src');
                                 var photo_title = $container.find('p:nth-child(2)').html();
-                                if(options.overlay){
+                                if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
                                 }
-                                
-                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'		
-                            }	
+
+                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'
+                            }
                             html_code += '</ul>';
-					
+
                             $(object).append(html_code);
-							
+
                         }
-                    });	
+                    });
                     break;
                 case 'instagram':
                     object.append("<ul class=\"instagram-list\"></ul>")
-                    var access_token = "200718541.a4734ab.cc050fa16d6141bf8b709c97ab158f57";						
-                    url =  "https://api.instagram.com/v1/users/search?q=" + options.username + "&access_token=" + access_token + "&count=1&callback=?";
-                    $.getJSON(url, function(data){
-						
-                        $.each(data.data, function(i,shot){
+                    var access_token = "200718541.a4734ab.cc050fa16d6141bf8b709c97ab158f57";
+                    url = "https://api.instagram.com/v1/users/search?q=" + options.username + "&access_token=" + access_token + "&count=1&callback=?";
+                    $.getJSON(url, function (data) {
+
+                        $.each(data.data, function (i, shot) {
                             var instagram_username = shot.username;
-                            if (instagram_username == options.username){
+                            if (instagram_username == options.username) {
                                 var user_id = shot.id;
-									  
-                                if (user_id != ""){	
-                                    url =  "https://api.instagram.com/v1/users/" + user_id + "/media/recent/?access_token=" + access_token + "&count=" + options.limit + "&callback=?";
-                                    $.getJSON(url, function(data){
-                                        $.each(data.data, function(i,shot){
+
+                                if (user_id != "") {
+                                    url = "https://api.instagram.com/v1/users/" + user_id + "/media/recent/?access_token=" + access_token + "&count=" + options.limit + "&callback=?";
+                                    $.getJSON(url, function (data) {
+                                        $.each(data.data, function (i, shot) {
                                             var photo_src = shot.images.thumbnail.url;
-                                            var photo_url = shot.link;                                            
+                                            var photo_url = shot.link;
 
                                             var photo_title = "";
-                                            if (shot.caption != null){
+                                            if (shot.caption != null) {
                                                 photo_title = shot.caption.text;
                                             }
-											  
+
                                             var photo_container = $('<img/>').attr({
-                                                src: photo_src, 
+                                                src: photo_src,
                                                 alt: photo_title
                                             });
                                             var url_container = $('<a/>').attr({
-                                                href: photo_url, 
-                                                target: '_blank', 
+                                                href: photo_url,
+                                                target: '_blank',
                                                 title: photo_title
                                             });
                                             var tmp = $(url_container).append(photo_container);
-                                            if(options.overlay){
+                                            if (options.overlay) {
                                                 var overlay_div = $('<div/>').addClass('img-overlay');
                                                 $(url_container).append(overlay_div);
                                             }
                                             var li = $('<li/>').append(tmp);
                                             $("ul", object).append(li);
-						
+
                                         });
                                     });
-                                }   
+                                }
                             }
                         });
-                    });		
+                    });
                     break;
                 case 'dribbble':
                     object.append("<ul class=\"dribbble-list\"></ul>")
-                    $.getJSON("http://dribbble.com/" + options.username + "/shots.json?callback=?", function(data){
-                        $.each(data.shots, function(num,shot){
+                    $.getJSON("http://dribbble.com/" + options.username + "/shots.json?callback=?", function (data) {
+                        $.each(data.shots, function (num, shot) {
                             if (num < options.limit) {
                                 var photo_title = shot.title;
                                 var photo_container = $('<img/>').attr({
-                                    src: shot.image_teaser_url, 
+                                    src: shot.image_teaser_url,
                                     alt: photo_title
                                 });
                                 var url_container = $('<a/>').attr({
-                                    href: shot.url, 
-                                    target: '_blank', 
+                                    href: shot.url,
+                                    target: '_blank',
                                     title: photo_title
                                 });
                                 var tmp = $(url_container).append(photo_container);
-                                if(options.overlay){
+                                if (options.overlay) {
                                     var overlay_div = $('<div/>').addClass('img-overlay');
                                     $(url_container).append(overlay_div);
                                 }
@@ -159,144 +160,185 @@
                                 $("ul", object).append(li);
                             }
                         });
-                       	
-                    });	
+
+                    });
                     break;
                 case 'deviantart':
                     var url = 'http://backend.deviantart.com/rss.xml?type=deviation&q=by%3A' + options.username + '+sort%3Atime+meta%3Aall';
                     var api = "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=" + encodeURIComponent(url) + "&num=" + options.limit + "&output=json_xml";
-				
-                    $.getJSON(api, function(data){                        
-                        if (data.responseStatus == 200) {		
+
+                    $.getJSON(api, function (data) {
+                        if (data.responseStatus == 200) {
                             var photofeed = data.responseData.feed;
                             var overlay_div = "";
                             if (!photofeed) {
                                 return false;
-                                
+
                             }
                             var html_code = '<ul class=\"deviantart-list\">';
-					
+
                             for (var i = 0; i < photofeed.entries.length; i++) {
                                 var entry = photofeed.entries[i];
                                 var $container = $("<div></div>");
                                 $container.append(entry.content);
-                                var url = entry.link;                           
+                                var url = entry.link;
                                 var photo_url = $container.find('img').attr('src');
                                 var photo_title = entry.title;
-                                if(options.overlay){
+                                if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
                                 }
-                                
-                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'		
-                            }	
+
+                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'
+                            }
                             html_code += '</ul>';
-					
+
                             $(object).append(html_code);
-							
+
                         }
-                    });	
-                   
+                    });
+
                     break;
                 case 'picasa':
                     var url = 'https://picasaweb.google.com/data/feed/base/user/' + options.username + '?alt=rss&kind=photo&hl=en_US&imgmax=' + options.limit + '&thumbsize=48c';
                     var api = "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=" + encodeURIComponent(url) + "&num=" + options.limit + "&output=json_xml";
 
-                    $.getJSON(api, function(data){                        
-                        if (data.responseStatus == 200) {		
+                    $.getJSON(api, function (data) {
+                        if (data.responseStatus == 200) {
                             var photofeed = data.responseData.feed;
                             var overlay_div = "";
                             if (!photofeed) {
                                 return false;
                             }
                             var html_code = '<ul class=\"picasa-list\">';
-					
+
                             for (var i = 0; i < photofeed.entries.length; i++) {
                                 var entry = photofeed.entries[i];
                                 var $container = $("<div></div>");
                                 $container.append(entry.content);
-                                var url = entry.link;                           
+                                var url = entry.link;
                                 var photo_url = $container.find('img').attr('src');
                                 var photo_title = entry.title;
-                                if(options.overlay){
+                                if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
                                 }
-                                
-                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'		
-                            }	
-                            html_code += '</ul>';
-					
-                            $(object).append(html_code);				
-                        }
-                    });	
-                    break;   
-                case 'youtube':
-                    var url = 'https://gdata.youtube.com/feeds/api/users/' + options.username + '/uploads';
-                    var api = "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=" + encodeURIComponent(url) + "&num=" + options.limit + "&output=json_xml";
 
-                    $.getJSON(api, function(data){
-                        if (data.responseStatus == 200) {		
-                            var photofeed = data.responseData.feed;
-                            var overlay_div = "";
-                            if (!photofeed) {
-                                return false;
+                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'
                             }
-                            var html_code = '<ul class=\"youtube-list\">';
-					
-                            for (var i = 0; i < photofeed.entries.length; i++) {
-                                var entry = photofeed.entries[i];
-                                var $container = $("<div></div>");
-                                $container.append(entry.content);
-                                var url = entry.link;  
-                                
-                                var results = url.match("[\\?&]v=([^&#]*)");
-                                var vid = results[1];
-                                var photo_url = "http://img.youtube.com/vi/" + vid + "/2.jpg";                        
-                                var photo_title = entry.title;
-                                if(options.overlay){
-                                    var overlay_div = '<div class="img-overlay"></div>';
-                                }
-                                
-                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'		
-                            }	
                             html_code += '</ul>';
-					
-                            $(object).append(html_code);				
+
+                            $(object).append(html_code);
                         }
                     });
                     break;
-                    
+                case 'youtube':
+                    var pid;
+                    if (options.apikey) {
+
+                        // Get Uploads Playlist
+                        $.get(
+                                "https://www.googleapis.com/youtube/v3/channels", {
+                                    part: 'contentDetails',
+                                    forUsername: options.username,
+                                    key: options.apikey
+                                },
+                        function (data) {
+
+                            $.each(data.items, function (i, item) {
+                                //playlist id
+                                pid = item.contentDetails.relatedPlaylists.uploads;
+                                youtubeGetVids(pid);
+                            });
+
+                        }
+                        );
+
+                    }
+
+                    //Get Videos
+                    function youtubeGetVids(pid) {
+                        $.get(
+                                "https://www.googleapis.com/youtube/v3/playlistItems", {
+                                    part: 'snippet',
+                                    maxResults: options.limit,
+                                    playlistId: pid,
+                                    key: options.apikey
+                                },
+                        function (data) {
+                            var results;
+
+                            var html_code = '<ul class=\"youtube-list\">';
+
+                            // loop through videos
+                            $.each(data.items, function (i, item) {
+
+                                var photofeed = item.snippet.thumbnails.default.url;
+                                var overlay_div = "";
+                                if (!photofeed) {
+                                    return false;
+                                }
+
+                                // create container
+                                var $container = $("<div></div>");
+
+                                // get image url
+                                var url = 'https://www.youtube.com/watch?v=' + item.snippet.resourceId.videoId;
+
+                                // video title
+                                var photo_title = item.snippet.title;
+                                if (options.overlay) {
+                                    var overlay_div = '<div class="img-overlay"></div>';
+                                }
+
+                                // create html
+                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photofeed + '"/>' + overlay_div + '</a></li>'
+
+                            });
+
+                            html_code += '</ul>';
+
+                            // append html
+                            $(object).append(html_code);
+                        }
+                        );
+                    }
+
+
+
+
+                    break;
+
                 case 'newsfeed':
                     var api = "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=" + encodeURIComponent(options.username) + "&num=" + options.limit + "&output=json_xml";
 
-                    $.getJSON(api, function(data){	
-                        if (data.responseStatus == 200) {		
+                    $.getJSON(api, function (data) {
+                        if (data.responseStatus == 200) {
                             var photofeed = data.responseData.feed;
                             var overlay_div = "";
                             if (!photofeed) {
                                 return false;
                             }
                             var html_code = '<ul class=\"social-feed\">';
-					
+
                             for (var i = 0; i < photofeed.entries.length; i++) {
                                 var entry = photofeed.entries[i];
                                 var $container = $("<div></div>");
                                 $container.append(entry.content);
-                                var url = entry.link;  
+                                var url = entry.link;
                                 var photo_url = $container.find('img').attr('src');
                                 var photo_title = entry.title;
-                                if(options.overlay){
+                                if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
                                 }
-                                
-                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'		
-                            }	
+
+                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'
+                            }
                             html_code += '</ul>';
-					
-                            $(object).append(html_code);				
+
+                            $(object).append(html_code);
                         }
                     });
                     break;
             }
-        });  
-    };  
+        });
+    };
 })(jQuery);

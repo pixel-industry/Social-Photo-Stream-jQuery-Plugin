@@ -179,7 +179,8 @@ $('.dibbble-feed').socialstream({
 $('.youtube-feed').socialstream({
     socialnetwork: 'youtube',
     limit: 15,
-    username: 'your_username_here'
+    username: 'your_username_here',
+    apikey: 'you_v3_api_key'
 })
 </code>
 </pre>
@@ -210,6 +211,12 @@ $('.newsfeed').socialstream({
 <p> When plugin loads, it makes one unordered list. Inside of it,
                                 every image is one list item. To style it, simply refer to for example ".social-feed.flickr-feed li" in your css file and edit it the way 
                                 you like. We also included demo with simple html and css styling for easier plugin understanding.</p>
+
+<h3>Change Log</h3>
+<p>v1.3</p>
+<pre>
+- Fixed youtube stream - switched to API v3.
+</pre>
 
 
 
