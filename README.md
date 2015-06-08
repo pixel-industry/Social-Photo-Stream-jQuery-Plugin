@@ -172,7 +172,8 @@ $('.dibbble-feed').socialstream({
 </code>
 </pre>
 
-<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username:</p>
+<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username and API key. API key can be generated on YouTube <a href="https://console.developers.google.com/">developers console</a>.
+To protect your API key, create Browser key and use your domain as HTTP referrer.</p>
 <pre>
 <code>
 /* ================ Youtube Feed ================ */
@@ -215,7 +216,7 @@ $('.newsfeed').socialstream({
 <h3>Change Log</h3>
 <p>v1.3</p>
 <pre>
-- Fixed youtube stream - switched to API v3.
+- Fixed Youtube stream - switched to API v3.
 </pre>
 
 
