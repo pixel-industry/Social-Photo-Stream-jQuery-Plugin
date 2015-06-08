@@ -217,6 +217,7 @@ $('.newsfeed').socialstream({
 <p>v1.3</p>
 <pre>
 - Fixed Youtube stream - switched to API v3.
+- Fixed issue with Smiley icons on DeviantArt stream.
 </pre>
 
 

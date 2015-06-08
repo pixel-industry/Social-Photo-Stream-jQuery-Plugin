@@ -183,6 +183,12 @@
                                 $container.append(entry.content);
                                 var url = entry.link;
                                 var photo_url = $container.find('img').attr('src');
+                                
+                                // ignore smiley images
+                                if (photo_url.indexOf("smile.gif") >= 0){
+                                    continue;
+                                }
+
                                 var photo_title = entry.title;
                                 if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
