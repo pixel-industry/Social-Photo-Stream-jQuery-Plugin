@@ -214,6 +214,11 @@ $('.newsfeed').socialstream({
                                 you like. We also included demo with simple html and css styling for easier plugin understanding.</p>
 
 <h3>Change Log</h3>
+<p>v1.3.1</p>
+<pre>
+- Image title sanitized for SEO purposes
+</pre>
+
 <p>v1.3</p>
 <pre>
 - Fixed Youtube stream - switched to API v3.

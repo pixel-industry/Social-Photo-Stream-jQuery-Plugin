@@ -3,7 +3,7 @@
  * 
  * Author: Pixel Industry
  * Website: http://pixel-industry.com
- * Version: 1.3
+ * Version: 1.3.1
  *
  */
 
@@ -189,7 +189,7 @@
                                     continue;
                                 }
 
-                                var photo_title = entry.title;
+                                var photo_title = entry.title.replace(/.jpg/g, "").replace(/-/g, " ").replace(/_/g, " ");
                                 if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
                                 }
@@ -223,7 +223,7 @@
                                 $container.append(entry.content);
                                 var url = entry.link;
                                 var photo_url = $container.find('img').attr('src');
-                                var photo_title = entry.title;
+                                var photo_title = entry.title.replace(/.jpg/g, "").replace(/-/g, " ").replace(/_/g, " ");
                                 if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
                                 }
@@ -331,7 +331,7 @@
                                 $container.append(entry.content);
                                 var url = entry.link;
                                 var photo_url = $container.find('img').attr('src');
-                                var photo_title = entry.title;
+                                var photo_title = entry.title.replace(/.jpg/g, "").replace(/-/g, " ").replace(/_/g, " ");
                                 if (options.overlay) {
                                     var overlay_div = '<div class="img-overlay"></div>';
                                 }
