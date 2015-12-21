@@ -244,7 +244,7 @@
                         $.get(
                                 "https://www.googleapis.com/youtube/v3/channels", {
                                     part: 'contentDetails',
-                                    forUsername: options.username,
+                                    id: options.username,
                                     key: options.apikey
                                 },
                         function (data) {
