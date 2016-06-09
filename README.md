@@ -2,7 +2,7 @@ Social Photo Stream jQuery Plugin
 =================================
 
 jQuery plugin that displays latest images from 8 
-social networks like dribbble, deviantart, piacsa, pinterest and more
+social networks like Dribbble, DeviantArt, Picasa, Pinterest and more.
 
 <p>Author: Pixel Industry<br />
 Website - pixel-industry.com<br />
@@ -11,11 +11,11 @@ Licence - GPL</p>
 <h3>Description</h3>
 <p>
 This simple jQuery plugin allows you to make photo stream
-                        feed from 8 networks, including: picasa, pinterest, dribbble,
-                        instagram, deviantart, youtube, flickr and regular news page.
+                        feed from 8 networks, including: Picasa, Pinterest, Dribbble,
+                        Instagram, Deviantart, Youtube, Flickr and RSS feed.
                         You can use it on multiple places across your website. Only thing you
                         need is the username of the account from which you want images
-                        to be shown.
+                        to be shown and for social networks API key or Access Token.
 </p>
 
 <h4> Social Photo Streams included withing this plugin</h4>
@@ -27,17 +27,17 @@ This simple jQuery plugin allows you to make photo stream
    <li>Deviantart</li>
    <li>Flickr</li>
    <li>Dribbble</li>
-   <li>News photo stream</li>
+   <li>News photo stream (RSS)</li>
 </ul>
 
-<h3>Instalation</h3>
-<p>This plugin needs only two js files to work. You must include them at the bottom of the body in your HTML document. These are:</p>
+<h3>Installation</h3>
+<p>This plugin needs only two JS files to work. You must include them at the bottom of the body in your HTML document. Those are:</p>
 <ul>
 <li>jQuery library</li>
 <li>socialstream.jquery.js file which is included in the download package.</li>
 </ul>
 
-<h5>HTML Structure & jQuery code for Deviantart Feed</h5>
+<h5>Deviantart Feed</h5>
 
 <pre>
 <code>
@@ -49,7 +49,7 @@ This simple jQuery plugin allows you to make photo stream
 <p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username:</p>
 <pre>
 <code>
-/* ================ DEVIANT ART FEED ================ */
+/* ================ DEVIANTART FEED ================ */
 $('.deviant-feed').socialstream({
     socialnetwork: 'deviantart',
     limit: 15,
@@ -58,7 +58,7 @@ $('.deviant-feed').socialstream({
 </code>
 </pre>
 
-<h5>HTML Structure & jQuery code for Instagram Feed</h5>
+<h5>Instagram Feed</h5>
 
 <pre>
 <code>
@@ -67,10 +67,10 @@ $('.deviant-feed').socialstream({
 </code>
 </pre>
 
-<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username:</p>
+<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username and Access Token:</p>
 <pre>
 <code>
-/* ================ Instagram FEED ================ */
+/* ================ INSTAGRAM FEED ================ */
 $('.instagram-feed').socialstream({
     socialnetwork: 'instagram',
     limit: 15,
@@ -88,7 +88,7 @@ $('.instagram-feed').socialstream({
 In case you can't fetch images after generating Access Token, try generating Access Token with <strong>scope</strong> parameter set at the end of URL. Example:</p>
 <pre>https://instagram.com/oauth/authorize/?client_id=[CLIENT_ID]&amp;redirect_uri=[REDIRECT_URI]&amp;response_type=token&scope=basic+public_content+follower_list+comments+relationships+likes</pre>
 
-<h5>HTML Structure & jQuery code for Picasa Feed</h5>
+<h5>Picasa Feed</h5>
 
 <pre>
 <code>
@@ -97,7 +97,7 @@ In case you can't fetch images after generating Access Token, try generating Acc
 </code>
 </pre>
 
-<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username:</p>
+<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username and Picasa Album ID:</p>
 <pre>
 <code>
 /* ================ PICASA FEED ================ */
@@ -120,7 +120,7 @@ Example (bold part):
 </li>
 </ul>
 
-<h5>HTML Structure & jQuery code for Pinterest Feed</h5>
+<h5>Pinterest Feed</h5>
 
 <pre>
 <code>
@@ -141,7 +141,7 @@ $('.pinterest-feed').socialstream({
 </code>
 </pre>
 
-<h5>HTML Structure & jQuery code for Flickr Feed</h5>
+<h5>Flickr Feed</h5>
 
 <pre>
 <code>
@@ -153,7 +153,7 @@ $('.pinterest-feed').socialstream({
 <p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username:</p>
 <pre>
 <code>
-/* ================ FLICKRFEED ================ */
+/* ================ FLICKR FEED ================ */
 $('.flickr-feed').socialstream({
     socialnetwork: 'flickr',
     limit: 15,
@@ -162,7 +162,7 @@ $('.flickr-feed').socialstream({
 </code>
 </pre>
 
-<h5>HTML Structure & jQuery code for Dribbble Feed</h5>
+<h5>Dribbble Feed</h5>
 
 <pre>
 <code>
@@ -171,10 +171,10 @@ $('.flickr-feed').socialstream({
 </code>
 </pre>
 
-<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username:</p>
+<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document enter your username and Access Token:</p>
 <pre>
 <code>
-/* ================ Dribbble Feed ================ */
+/* ================ DRIBBBLE Feed ================ */
 $('.dibbble-feed').socialstream({
     socialnetwork: 'dribbble',
     limit: 15,
@@ -192,7 +192,7 @@ $('.dibbble-feed').socialstream({
 <li>At the bottom of new screen you will find <strong>Client Access Token</strong>. This is your Access Token.</li>
 </ul>
 
-<h5>HTML Structure & jQuery code for Youtube Feed</h5>
+<h5>Youtube Feed</h5>
 
 <pre>
 <code>
@@ -205,7 +205,7 @@ $('.dibbble-feed').socialstream({
 To protect your API key, create Browser key and use your domain as HTTP referrer.</p>
 <pre>
 <code>
-/* ================ Youtube Feed ================ */
+/* ================ YOUTUBE FEED ================ */
 $('.youtube-feed').socialstream({
     socialnetwork: 'youtube',
     limit: 15,
@@ -215,7 +215,7 @@ $('.youtube-feed').socialstream({
 </code>
 </pre>
 
-<h5>HTML Structure & jQuery code for News Feed</h5>
+<h5>News (RSS) Feed</h5>
 
 <pre>
 <code>
@@ -228,7 +228,7 @@ $('.youtube-feed').socialstream({
 </p>
 <pre>
 <code>
-/* ================ News Feed ================ */
+/* ================ NEWS FEED ================ */
 $('.newsfeed').socialstream({
     socialnetwork: 'newsfeed',
     limit: 15,
