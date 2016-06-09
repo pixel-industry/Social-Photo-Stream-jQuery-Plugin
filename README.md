@@ -37,6 +37,8 @@ This simple jQuery plugin allows you to make photo stream
 <li>socialstream.jquery.js file which is included in the download package.</li>
 </ul>
 
+<br/>
+
 <h5>Deviantart Feed</h5>
 
 <pre>
@@ -57,7 +59,9 @@ $('.deviant-feed').socialstream({
 })
 </code>
 </pre>
-<br/><br/>
+
+<br/>
+
 <h5>Instagram Feed</h5>
 
 <pre>
@@ -87,7 +91,9 @@ $('.instagram-feed').socialstream({
 <br/>
 In case you can't fetch images after generating Access Token, try generating Access Token with <strong>scope</strong> parameter set at the end of URL. Example:</p>
 <pre>https://instagram.com/oauth/authorize/?client_id=[CLIENT_ID]&amp;redirect_uri=[REDIRECT_URI]&amp;response_type=token&scope=basic+public_content+follower_list+comments+relationships+likes</pre>
-<br/><br/>
+
+<br/>
+
 <h5>Picasa Feed</h5>
 
 <pre>
@@ -119,7 +125,9 @@ Example (bold part):
 <p>https://picasaweb.google.com/data/feed/base/user/12345678890/albumid/<strong>123456789031</strong>?alt=rss&kind=photo&hl=en_US</p>
 </li>
 </ul>
-<br/><br/>
+
+<br/>
+
 <h5>Pinterest Feed</h5>
 
 <pre>
@@ -140,7 +148,9 @@ $('.pinterest-feed').socialstream({
 })
 </code>
 </pre>
-<br/><br/>
+
+<br/>
+
 <h5>Flickr Feed</h5>
 
 <pre>
@@ -161,7 +171,9 @@ $('.flickr-feed').socialstream({
 })
 </code>
 </pre>
-<br/><br/>
+
+<br/>
+
 <h5>Dribbble Feed</h5>
 
 <pre>
@@ -191,7 +203,9 @@ $('.dibbble-feed').socialstream({
 <li>Fill-in all required fields, accept Dribble terms and submit the form.</li>
 <li>At the bottom of new screen you will find <strong>Client Access Token</strong>. This is your Access Token.</li>
 </ul>
-<br/><br/>
+
+<br/>
+
 <h5>Youtube Feed</h5>
 
 <pre>
@@ -214,7 +228,7 @@ $('.youtube-feed').socialstream({
 })
 </code>
 </pre>
-<br/><br/>
+<br/>
 <h5>News (RSS) Feed</h5>
 
 <pre>
