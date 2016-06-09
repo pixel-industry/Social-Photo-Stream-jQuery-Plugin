@@ -17,13 +17,13 @@
 
         <article class="grid_3 social-feed instagram-feed">
             <section class="section-title">
-                <h4>Instagram</h4>
+                <h4>Instagram <small>(Access token required)</small></h4>
             </section>
         </article>
 
         <article class="grid_3 social-feed picasa-feed">
             <section class="section-title">
-                <h4>Picasa</h4>
+                <h4>Picasa <small>(username and Album ID required)</small></h4>
             </section>
         </article>
 
@@ -41,13 +41,13 @@
 
         <article class="grid_3 social-feed dribbble-feed">
             <section class="section-title">
-                <h4>dribbble</h4>
+                <h4>dribbble <small>(Access token required)</small></h4>
             </section>
         </article>
 
         <article class="grid_3 social-feed youtube-feed">
             <section class="section-title">
-                <h4>youtube</h4>
+                <h4>youtube <small>(API key required)</small></h4>
             </section>
         </article>
 
@@ -88,7 +88,8 @@
             $('.dribbble-feed').socialstream({
                 socialnetwork: 'dribbble',
                 limit: 15,
-                username: 'envato'
+                username: 'pixel_industry',
+                accessToken: '' // required
             })
 
             /* ================ YOUTUBE FEED ================ */
@@ -108,17 +109,19 @@
 
             /* ================ INSTAGRAM FEED ================ */
             $('.instagram-feed').socialstream({
-                socialnetwork: 'flickr',
+                socialnetwork: 'instagram',
                 limit: 15,
-                username: 'Mrky1',
-                overlay: true
+                username: 'pixel_industry',
+                overlay: true,
+                accessToken: '' // required
             })
 
             /* ================ PICASA FEED ================ */
             $('.picasa-feed').socialstream({
                 socialnetwork: 'picasa',
                 limit: 15,
-                username: 'vmrkela1@gmail.com'
+                username: '', // your picasa username
+                picasaAlbumId: '' // album ID, read on Github plugin page how to obtain album ID
             });
             /* ]]> */
         </script>

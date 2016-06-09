@@ -74,10 +74,19 @@ $('.deviant-feed').socialstream({
 $('.instagram-feed').socialstream({
     socialnetwork: 'instagram',
     limit: 15,
-    username: 'your_username_here'
+    username: 'your_username_here',
+    accessToken: ''
 })
 </code>
 </pre>
+
+<p>Due to recent API and Terms changes, Access Token is required to fetch images from Instagram.</p>
+<p>More about process of generating Access Token can be found <a href="http://jelled.com/instagram/access-token">here</a>.</p>
+
+<p><strong>Note</strong>
+<br/>
+In case you can't fetch images after generating Access Token, try generating Access Token with <strong>scope</strong> parameter set at the end of URL. Example:</p>
+<pre>https://instagram.com/oauth/authorize/?client_id=[CLIENT_ID]&amp;redirect_uri=[REDIRECT_URI]&amp;response_type=token&scope=basic+public_content+follower_list+comments+relationships+likes</pre>
 
 <h5>HTML Structure & jQuery code for Picasa Feed</h5>
 
@@ -95,10 +104,21 @@ $('.instagram-feed').socialstream({
 $('.picasa-feed').socialstream({
     socialnetwork: 'picasa',
     limit: 15,
-    username: 'your_username_here'
+    username: 'your_username_here',
+    picasaAlbumId: ''
 })
 </code>
 </pre>
+
+<p>Parameter <strong>picasaAlbumId</strong> is new required parameter. To obtain Album ID please follow the guide:</p>
+<ul>
+<li>Click on your album</li>
+<li>Click on RSS icon on the right size of the screen</li>
+<li>Find section with lot of number that proceed after "albumid" in browser URL. 
+Example (bold part):
+<p>https://picasaweb.google.com/data/feed/base/user/12345678890/albumid/<strong>123456789031</strong>?alt=rss&kind=photo&hl=en_US</p>
+</li>
+</ul>
 
 <h5>HTML Structure & jQuery code for Pinterest Feed</h5>
 
@@ -158,10 +178,19 @@ $('.flickr-feed').socialstream({
 $('.dibbble-feed').socialstream({
     socialnetwork: 'dribbble',
     limit: 15,
-    username: 'your_username_here'
+    username: 'your_username_here',
+    accessToken: ''
 })
 </code>
 </pre>
+
+<p>From version 1.4 Access Token is required to fetch images from Dribbble due to API changes.</p>
+<p><strong>Generating Access Token</strong></p>
+<ul>
+<li>Navigate to <a href="https://dribbble.com/account/applications/new">Application Registration page</a>.</li>
+<li>Fill-in all required fields, accept Dribble terms and submit the form.</li>
+<li>At the bottom of new screen you will find <strong>Client Access Token</strong>. This is your Access Token.</li>
+</ul>
 
 <h5>HTML Structure & jQuery code for Youtube Feed</h5>
 
@@ -214,6 +243,14 @@ $('.newsfeed').socialstream({
                                 you like. We also included demo with simple html and css styling for easier plugin understanding.</p>
 
 <h3>Change Log</h3>
+<p>v1.4</p>
+<pre>
+- Fixed Instagram feed that break because of Instagram API and terms changes
+- Fixed Picasa feed. Album ID now must be set to fetch photos.
+- Fixed Dribble feed. Access token is now necessary to fetch images. 
+</pre>
+
+
 <p>v1.3.1</p>
 <pre>
 - Image title sanitized for SEO purposes

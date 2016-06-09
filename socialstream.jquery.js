@@ -3,7 +3,7 @@
  * 
  * Author: Pixel Industry
  * Website: http://pixel-industry.com
- * Version: 1.3.1
+ * Version: 1.4
  *
  */
 
@@ -15,7 +15,9 @@
             username: 'pixel-industry',
             limit: 6,
             overlay: true,
-            apikey: false
+            apikey: false,
+            accessToken: '',
+            picasaAlbumId: ''
         };
         var options = $.extend(defaults, options);
 
@@ -91,7 +93,15 @@
                     break;
                 case 'instagram':
                     object.append("<ul class=\"instagram-list\"></ul>")
-                    var access_token = "200718541.a4734ab.cc050fa16d6141bf8b709c97ab158f57";
+
+                    // check if access token is set
+                    if ((typeof (options.accessToken) != "undefined") && options.accessToken != "") {
+                        var access_token = options.accessToken;
+                    } else {
+                        console.warn("Instagram Access Token is not set. Please enter it in plugin init call.");
+                        return;
+                    }
+
                     url = "https://api.instagram.com/v1/users/search?q=" + options.username + "&access_token=" + access_token + "&count=1&callback=?";
                     $.getJSON(url, function (data) {
 
@@ -138,16 +148,25 @@
                     break;
                 case 'dribbble':
                     object.append("<ul class=\"dribbble-list\"></ul>")
-                    $.getJSON("http://dribbble.com/" + options.username + "/shots.json?callback=?", function (data) {
-                        $.each(data.shots, function (num, shot) {
+
+                    // check if access token is set
+                    if ((typeof (options.accessToken) != "undefined") && options.accessToken != "") {
+                        var access_token = options.accessToken;
+                    } else {
+                        console.warn("Dribbble Access Token is not set. Please enter it in plugin init call.");
+                        return;
+                    }
+
+                    $.getJSON("https://api.dribbble.com/v1/users/" + options.username + "/shots?access_token=" + access_token + "&callback=?", function (data) {
+                        $.each(data.data, function (num, shot) {
                             if (num < options.limit) {
                                 var photo_title = shot.title;
                                 var photo_container = $('<img/>').attr({
-                                    src: shot.image_teaser_url,
+                                    src: shot.images.teaser,
                                     alt: photo_title
                                 });
                                 var url_container = $('<a/>').attr({
-                                    href: shot.url,
+                                    href: shot.html_url,
                                     target: '_blank',
                                     title: photo_title
                                 });
@@ -183,9 +202,9 @@
                                 $container.append(entry.content);
                                 var url = entry.link;
                                 var photo_url = $container.find('img').attr('src');
-                                
+
                                 // ignore smiley images
-                                if (photo_url.indexOf("smile.gif") >= 0){
+                                if (photo_url.indexOf("smile.gif") >= 0) {
                                     continue;
                                 }
 
@@ -205,20 +224,32 @@
 
                     break;
                 case 'picasa':
-                    var url = 'https://picasaweb.google.com/data/feed/base/user/' + options.username + '?alt=rss&kind=photo&hl=en_US&imgmax=' + options.limit + '&thumbsize=48c';
-                    var api = "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=" + encodeURIComponent(url) + "&num=" + options.limit + "&output=json_xml";
+                    var url = 'https://picasaweb.google.com/data/feed/base/user/' + options.username + '/album/' + options.picasaAlbumId + '?kind=photo&access=public&alt=json-in-script&imgmax=' + options.limit + '&callback=?';
 
-                    $.getJSON(api, function (data) {
-                        if (data.responseStatus == 200) {
-                            var photofeed = data.responseData.feed;
+                    $.getJSON(url, function (data) {
+                        if (data.feed.entry.length > 0) {
+
+                            var photofeed = data.feed.entry;
                             var overlay_div = "";
-                            if (!photofeed) {
-                                return false;
-                            }
+
                             var html_code = '<ul class=\"picasa-list\">';
 
-                            for (var i = 0; i < photofeed.entries.length; i++) {
-                                var entry = photofeed.entries[i];
+                            $.each(photofeed, function (i, pic) {
+                                var thumb = pic.media$group.media$thumbnail[2].url;
+                                var desc = pic.media$group.media$description.$t;
+                                var title = pic.media$group.media$title.$t;
+
+                                var url = pic.link[1].href;
+                                var photo_title = title.replace(/.jpg/g, "").replace(/.JPG/g, "").replace(/-/g, " ").replace(/_/g, " ");
+                                if (options.overlay) {
+                                    var overlay_div = '<div class="img-overlay"></div>';
+                                }
+
+                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + thumb + '"/>' + overlay_div + '</a></li>'
+                            });
+
+                            for (var i = 0; i < photofeed; i++) {
+                                var entry = photofeed[i];
                                 var $container = $("<div></div>");
                                 $container.append(entry.content);
                                 var url = entry.link;
