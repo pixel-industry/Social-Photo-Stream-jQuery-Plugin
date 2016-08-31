@@ -215,7 +215,7 @@ $('.dibbble-feed').socialstream({
 </code>
 </pre>
 
-<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username and API key. API key can be generated on YouTube <a href="https://console.developers.google.com/">developers console</a>.
+<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username (channel ID) and API key. For username, channel ID must be entered. API key can be generated on YouTube <a href="https://console.developers.google.com/">developers console</a>.
 To protect your API key, create Browser key and use your domain as HTTP referrer.</p>
 <pre>
 <code>
