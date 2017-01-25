@@ -222,51 +222,7 @@
                         }
                     });
 
-                    break;
-                case 'picasa':
-                    var url = 'https://picasaweb.google.com/data/feed/base/user/' + options.username + '/album/' + options.picasaAlbumId + '?kind=photo&access=public&alt=json-in-script&imgmax=' + options.limit + '&callback=?';
-
-                    $.getJSON(url, function (data) {
-                        if (data.feed.entry.length > 0) {
-
-                            var photofeed = data.feed.entry;
-                            var overlay_div = "";
-
-                            var html_code = '<ul class=\"picasa-list\">';
-
-                            $.each(photofeed, function (i, pic) {
-                                var thumb = pic.media$group.media$thumbnail[2].url;
-                                var desc = pic.media$group.media$description.$t;
-                                var title = pic.media$group.media$title.$t;
-
-                                var url = pic.link[1].href;
-                                var photo_title = title.replace(/.jpg/g, "").replace(/.JPG/g, "").replace(/-/g, " ").replace(/_/g, " ");
-                                if (options.overlay) {
-                                    var overlay_div = '<div class="img-overlay"></div>';
-                                }
-
-                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + thumb + '"/>' + overlay_div + '</a></li>'
-                            });
-
-                            for (var i = 0; i < photofeed; i++) {
-                                var entry = photofeed[i];
-                                var $container = $("<div></div>");
-                                $container.append(entry.content);
-                                var url = entry.link;
-                                var photo_url = $container.find('img').attr('src');
-                                var photo_title = entry.title.replace(/.jpg/g, "").replace(/-/g, " ").replace(/_/g, " ");
-                                if (options.overlay) {
-                                    var overlay_div = '<div class="img-overlay"></div>';
-                                }
-
-                                html_code += '<li><a target="_blank" href="' + url + '" title="' + photo_title + '"><img src="' + photo_url + '"/>' + overlay_div + '</a></li>'
-                            }
-                            html_code += '</ul>';
-
-                            $(object).append(html_code);
-                        }
-                    });
-                    break;
+                    break;                
                 case 'youtube':
                     var pid;
                     if (options.apikey) {
@@ -338,9 +294,6 @@
                         }
                         );
                     }
-
-
-
 
                     break;
 

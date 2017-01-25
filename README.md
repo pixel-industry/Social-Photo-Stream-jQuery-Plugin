@@ -1,3 +1,6 @@
+> **NOTICE**
+> Due to Google AJAX Feed API being shutdown from January, 2017., feeds from Pinterest, DeviantArt and Newsfeed are no longer working. Plugin won't be development until proper Google API replacement appear.
+
 Social Photo Stream jQuery Plugin
 =================================
 
@@ -20,7 +23,6 @@ This simple jQuery plugin allows you to make photo stream
 
 <h4> Social Photo Streams included withing this plugin</h4>
 <ul>
-   <li>Picasa</li>
    <li>Pinterest</li>
    <li>Instagram</li>
    <li>Youtube</li>
@@ -91,40 +93,6 @@ $('.instagram-feed').socialstream({
 <br/>
 In case you can't fetch images after generating Access Token, try generating Access Token with <strong>scope</strong> parameter set at the end of URL. Example:</p>
 <pre>https://instagram.com/oauth/authorize/?client_id=[CLIENT_ID]&amp;redirect_uri=[REDIRECT_URI]&amp;response_type=token&scope=basic+public_content+follower_list+comments+relationships+likes</pre>
-
-<br/>
-
-<h5>Picasa Feed</h5>
-
-<pre>
-<code>
-&#60;article class="social-feed picasa-feed"&#62;
-&#60;/article&#62;
-</code>
-</pre>
-
-<p>Now enter this js code inside "script" tags at the bottom of the body in your HTML document and enter your username and Picasa Album ID:</p>
-<pre>
-<code>
-/* ================ PICASA FEED ================ */
-$('.picasa-feed').socialstream({
-    socialnetwork: 'picasa',
-    limit: 15,
-    username: 'your_username_here',
-    picasaAlbumId: ''
-})
-</code>
-</pre>
-
-<p>Parameter <strong>picasaAlbumId</strong> is new required parameter. To obtain Album ID please follow the guide:</p>
-<ul>
-<li>Click on your album</li>
-<li>Click on RSS icon on the right size of the screen</li>
-<li>Find section with lot of number that proceed after "albumid" in browser URL. 
-Example (bold part):
-<p>https://picasaweb.google.com/data/feed/base/user/12345678890/albumid/<strong>123456789031</strong>?alt=rss&kind=photo&hl=en_US</p>
-</li>
-</ul>
 
 <br/>
 
