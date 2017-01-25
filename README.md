@@ -1,4 +1,4 @@
-> **NOTICE**
+**NOTICE**
 > Due to Google AJAX Feed API being shutdown from January, 2017., feeds from Pinterest, DeviantArt and Newsfeed are no longer working. Plugin won't be development until proper Google API replacement appear.
 
 Social Photo Stream jQuery Plugin
